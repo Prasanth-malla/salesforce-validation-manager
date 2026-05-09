@@ -21,13 +21,11 @@ function Callback() {
       )
       .then((response) => {
 
-        // Store access token
         localStorage.setItem(
           "accessToken",
           response.data.access_token
         );
 
-        // Store instance URL
         localStorage.setItem(
           "instanceUrl",
           response.data.instance_url
@@ -50,7 +48,7 @@ function Callback() {
 
     }
 
-  }, []);
+  }, [navigate]);
 
   return <h2>Loading...</h2>;
 
