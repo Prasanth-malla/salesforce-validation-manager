@@ -91,7 +91,7 @@ function App() {
     try {
 
       await axios.patch(
-        "https://salesforce-backend-bsvk.onrender.com",
+        "https://salesforce-backend-bsvk.onrender.com/auth-url",
         {
           accessToken,
           instanceUrl,
