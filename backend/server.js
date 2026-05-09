@@ -10,7 +10,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
+/*
+==================================================
+HOME ROUTE
+==================================================
+*/
+
+app.get("/", (req, res) => {
+
+  res.send(
+    "Salesforce Validation Rule Manager Backend is Running Successfully"
+  );
+
+});
 
 /*
 ==================================================
@@ -105,7 +119,6 @@ app.get("/validation-rules", async (req, res) => {
     instanceUrl,
   } = req.query;
 
-  // Correct Tooling API Query
   const query = `
     SELECT Id,
            ValidationName,
