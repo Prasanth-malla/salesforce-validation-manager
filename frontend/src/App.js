@@ -6,9 +6,18 @@ function App() {
   const [rules, setRules] = useState([]);
 
   /*
-  ==================================================
-  LOGIN WITH SALESFORCE
-  ==================================================
+  ==========================================
+  BACKEND BASE URL
+  ==========================================
+  */
+
+  const BASE_URL =
+    "https://salesforce-backend-bsvk.onrender.com";
+
+  /*
+  ==========================================
+  LOGIN
+  ==========================================
   */
 
   const login = async () => {
@@ -17,7 +26,7 @@ function App() {
 
       const response =
         await axios.get(
-          "https://salesforce-backend-bsvk.onrender.com"
+          `${BASE_URL}/auth-url`
         );
 
       window.location.href =
@@ -27,16 +36,16 @@ function App() {
 
       console.log(error);
 
-      alert("Login failed");
+      alert("Login Failed");
 
     }
 
   };
 
   /*
-  ==================================================
+  ==========================================
   FETCH VALIDATION RULES
-  ==================================================
+  ==========================================
   */
 
   const fetchRules = async () => {
@@ -51,7 +60,7 @@ function App() {
 
       const response =
         await axios.get(
-          "https://salesforce-backend-bsvk.onrender.com",
+          `${BASE_URL}/validation-rules`,
           {
             params: {
               accessToken,
@@ -75,9 +84,9 @@ function App() {
   };
 
   /*
-  ==================================================
+  ==========================================
   TOGGLE VALIDATION RULE
-  ==================================================
+  ==========================================
   */
 
   const toggleRule = async (rule) => {
@@ -91,7 +100,7 @@ function App() {
     try {
 
       await axios.patch(
-        "https://salesforce-backend-bsvk.onrender.com/auth-url",
+        `${BASE_URL}/toggle-rule`,
         {
           accessToken,
           instanceUrl,
@@ -99,7 +108,6 @@ function App() {
         }
       );
 
-      // Refresh rules after toggle
       fetchRules();
 
     } catch (error) {
@@ -114,12 +122,6 @@ function App() {
 
   };
 
-  /*
-  ==================================================
-  UI
-  ==================================================
-  */
-
   return (
 
     <div
@@ -130,8 +132,6 @@ function App() {
         minHeight: "100vh",
       }}
     >
-
-      {/* Heading */}
 
       <h1
         style={{
@@ -160,7 +160,7 @@ function App() {
         Login with Salesforce
       </button>
 
-      {/* Fetch Rules Button */}
+      {/* Get Rules Button */}
 
       <button
         onClick={fetchRules}
@@ -177,7 +177,7 @@ function App() {
         Get Validation Rules
       </button>
 
-      {/* Validation Rules */}
+      {/* Rules List */}
 
       <div style={{ marginTop: "30px" }}>
 
@@ -204,17 +204,9 @@ function App() {
                 }}
               >
 
-                {/* Rule Name */}
-
-                <h2
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                >
+                <h2>
                   {rule.ValidationName}
                 </h2>
-
-                {/* Status */}
 
                 <p
                   style={{
@@ -223,7 +215,6 @@ function App() {
                         ? "green"
                         : "red",
                     fontWeight: "bold",
-                    marginBottom: "15px",
                   }}
                 >
                   Status:
@@ -233,8 +224,6 @@ function App() {
                       : " Inactive"
                   }
                 </p>
-
-                {/* Toggle Button */}
 
                 <button
                   onClick={() => toggleRule(rule)}
@@ -248,7 +237,6 @@ function App() {
                     border: "none",
                     borderRadius: "5px",
                     cursor: "pointer",
-                    fontSize: "15px",
                   }}
                 >
                   {
