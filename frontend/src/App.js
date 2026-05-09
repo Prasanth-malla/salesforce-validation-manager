@@ -17,7 +17,7 @@ function App() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/auth-url"
+          "https://salesforce-backend-bsvk.onrender.com"
         );
 
       window.location.href =
@@ -51,7 +51,7 @@ function App() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/validation-rules",
+          "https://salesforce-backend-bsvk.onrender.com",
           {
             params: {
               accessToken,
@@ -91,7 +91,7 @@ function App() {
     try {
 
       await axios.patch(
-        "http://localhost:5000/toggle-rule",
+        "https://salesforce-backend-bsvk.onrender.com",
         {
           accessToken,
           instanceUrl,

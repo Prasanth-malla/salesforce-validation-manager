@@ -16,7 +16,7 @@ function Callback() {
     if (code) {
 
       axios.post(
-        "http://localhost:5000/token",
+        "https://salesforce-backend-bsvk.onrender.com/token",
         { code }
       )
       .then((response) => {
